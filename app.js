@@ -6,6 +6,7 @@ const PORT = 8080;
 
 app.use("/css", express.static("./css"));
 app.use("/js", express.static("./js"));
+app.use("/img", express.static("./img"));
 
 function handleListening() {
   console.log(`listening on: http://localhost:${PORT}`);

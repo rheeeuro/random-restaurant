@@ -3,13 +3,14 @@ var mapUiListBtn = document.getElementById('mapUiListBtn');
 var mapUiLocationBtn = document.getElementById('mapUiLocationBtn');
 
 var infowindow, mapContainer, map, ps;
+var hereImg, yellowImg;
 var keyword, range;
 var userCoords = {
     latitude: 37.566826,
     longitude: 126.9786567
 };
-var userLocation, bounds;
-var restaurants;
+var userLocation, userMarker, bounds;
+var restaurants, restaurantMarkers;
 
 
 
@@ -29,9 +30,23 @@ function initKakaoMap(){
         mapOption = {
             center: new kakao.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
             level: 3 // 지도의 확대 레벨
-    };  
-    map = new kakao.maps.Map(mapContainer, mapOption); 
-    ps = new kakao.maps.services.Places(map); 
+    };
+
+    hereImg = new kakao.maps.MarkerImage(
+        '../img/here.png',
+        new kakao.maps.Size(40, 60), new kakao.maps.Point(20, 60));
+    yellowImg = new kakao.maps.MarkerImage(
+        '../img/yellow.png',
+        new kakao.maps.Size(40, 60), new kakao.maps.Point(20, 60));
+
+        
+        map = new kakao.maps.Map(mapContainer, mapOption); 
+        ps = new kakao.maps.services.Places(map); 
+        userMarker = new kakao.maps.Marker({
+            position: userLocation,
+            image: hereImg
+        });
+        userMarker.setMap(map);
 }
 
 function initGeolocation(){
@@ -119,6 +134,12 @@ function randomRestaurant(){
     // 랜덤 이벤트
     const randomIndex = Math.floor(Math.random() * restaurants.length);
     console.log(randomIndex)
+
+    for(var i=0 ; i<restaurantMarkers.length ; i++){
+        restaurantMarkers[i].setImage();
+    }
+    restaurantMarkers[randomIndex].setZIndex(3);
+    restaurantMarkers[randomIndex].setImage(yellowImg);
     const randomElement = restaurants[randomIndex];
 
 
@@ -193,9 +214,9 @@ function displayMarker(place) {
     var point = new kakao.maps.LatLng(place.y, place.x) 
     var marker = new kakao.maps.Marker({
         map: map,
-        position: point
+        position: point,
     });
-
+    restaurantMarkers.push(marker);
     // 마커에 클릭이벤트를 등록합니다
     kakao.maps.event.addListener(marker, 'click', function() {
         // 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
@@ -230,6 +251,7 @@ function onResetBtn(){
 
 function init(){
     restaurants = [];
+    restaurantMarkers = [];
     keyword = getParameterByName('keyword')
     range = parseInt(getParameterByName('range'))
 
