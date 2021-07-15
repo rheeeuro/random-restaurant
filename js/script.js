@@ -158,8 +158,11 @@ function rendomRouletteUi(randomIndex){
     var ul = document.createElement("ul");
     for(let i=randomIndex ; i<restaurants.length; i++){
         var li = document.createElement("li");
+        var h6 = document.createElement("h6");
+        h6.innerText = restaurants[i].category_name.slice(6);
         var p = document.createElement("p");
         p.innerText = restaurants[i].place_name;
+        li.appendChild(h6);
         li.appendChild(p);
         ul.appendChild(li);
     }
