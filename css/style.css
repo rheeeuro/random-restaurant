@@ -136,7 +136,7 @@ a:active {
 }
 .popup-list-item p{
   margin-top: 0.5vh;
-  font-size: 15px;
+  font-size: 12px;
   float: left;
   max-width: 80vw;
   overflow: hidden;
@@ -147,7 +147,7 @@ a:active {
 .popup-list-item h1 span.item-title{
   max-width: 60%;
   min-width: 60%;
-  font-size: 25px;
+  font-size: 22px;
   font-weight: 800;
   float: left;
   overflow: hidden;
