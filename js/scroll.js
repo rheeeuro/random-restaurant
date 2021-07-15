@@ -1,3 +1,5 @@
+var map = document.getElementById('map')
+
 disableScroll = () => {
     document.querySelector('body').addEventListener('touchmove', this.removeEvent, { passive: false });
     document.querySelector('body').addEventListener('onclick', this.removeEvent, { passive: false });
@@ -15,4 +17,10 @@ removeEvent = e => {
     e.stopPropagation();
 }
 
-disableScroll();
+
+
+if (map){
+    enableScroll();
+}else {
+    disableScroll();
+}
