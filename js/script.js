@@ -124,7 +124,7 @@ function randomRestaurant(){
 
 
     rendomRouletteUi(randomIndex);
-    randomResultUi(randomElement.place_name);
+    randomResultUi(randomElement);
 }
 
 function rendomRouletteUi(randomIndex){
@@ -173,15 +173,18 @@ function rendomRouletteUi(randomIndex){
     })
 }
 
-function randomResultUi(name){
+function randomResultUi(element){
     if (document.getElementById('random-result')){
         document.getElementById('random-result').remove();
     }
     var div = document.createElement("div");
     var p = document.createElement("p");
-    p.innerText = '선정된 음식점: ' + name;
+    p.innerText = '선정된 음식점: ' + element.place_name;
     div.id = 'random-result'
     div.appendChild(p);
+    div.addEventListener('click', ()=>{
+        location.href = element.place_url;
+    })
     document.getElementById('mapContainer').appendChild(div);
 }
 
