@@ -68,31 +68,6 @@ a:active {
   position:absolute;
 }
 
-#random-result{
-  background-color: white;
-  color: black;
-  z-index: 11;
-  position: absolute;
-  height: 4%;
-  width: 55%;
-  top: 1%;
-  left: 43%;
-  font-size: 15px;
-  font-weight: 800;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  border-radius: 15px;
-  border: 1px solid black;
-}
-
-#random-result p{
-  padding: 5px;
-  margin: auto;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
 
 #roulette{
   background-color: white;
@@ -238,6 +213,31 @@ a:active {
   white-space: nowrap;
 }
 
+#random-result{
+  background-color: white;
+  color: black;
+  z-index: 11;
+  position: absolute;
+  height: 4%;
+  width: 55%;
+  top: 1%;
+  left: 43%;
+  font-size: 15px;
+  font-weight: 800;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border-radius: 15px;
+  border: 1px solid black;
+}
+
+#random-result p{
+  margin: auto;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .keyword-title {
   background-color: white;
   color: black;
@@ -287,23 +287,23 @@ button#mapUiBackBtn{
   width: 10%;
   top: 1%;
   left: 1%;
-  border: none;
   font-weight: 800;
-  font-size: 25px;
-  background-color: rgba(1, 1, 1, 0);
+  font-size: 20px;  
+  background-color: white;
+  border-radius: 15px;
   padding: 0;
 }
 
 button#mapUiLocationBtn{
   z-index: 11;
-  border: none;
   position: absolute;
   height: 4%;
   width: 10%;
   top: 6%;
   left: 1%;
-  font-size: 25px;
-  background-color: rgba(1, 1, 1, 0);
+  font-size: 15px;
+  background-color: white;
+  border-radius: 15px;
   padding: 0;
   font-weight: 800;
 }
