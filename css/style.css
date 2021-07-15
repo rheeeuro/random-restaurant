@@ -54,15 +54,15 @@ a:active {
 #map{
   display: flex;
   flex: end;
-  width:100vw;
-  height:100vh;
+  width:100%;
+  height:100%;
   position:absolute;
 }
 
 #ui{
   z-index: 91;
-  width:100vw;
-  height:100vh;
+  width:100%;
+  height:100%;
   position:absolute;
   display: flex;
   flex-direction: row;
@@ -73,9 +73,9 @@ a:active {
 #popup-container{
   z-index: 93;
   border-radius: 5px;
-  width: 80vw;
-  height: 70vh;
-  margin: 10vh 10vw;
+  width: 80%;
+  height: 70%;
+  margin: 10% 10%;
   position:absolute;
   display: flex;
   flex-direction: row;
@@ -204,10 +204,10 @@ button.map-ui-btn{
 button#mapUiBackBtn{
   z-index: 11;
   position: absolute;
-  height: 4vh;
-  width: 10vw;
-  top: 1vh;
-  left: 1vw;
+  height: 4%;
+  width: 10%;
+  top: 1%;
+  left: 1%;
   font-size: 15px;
   font-weight: 800;
 }
@@ -227,12 +227,12 @@ button.popup-btn{
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 10vh;
+  margin-bottom: 10%;
   text-align: center;
 }
 
 .ui-title{
-  margin-bottom: 5vh;
+  margin-bottom: 5%;
 }
 
 
@@ -240,9 +240,9 @@ button.popup-btn{
   z-index: 5;
   position:absolute;
   top: 0;
-  right: 2vw;
+  right: 2%;
   margin: auto;
-  height: 5vh;
+  height: 5%;
   text-align: center;
 }
 
@@ -257,5 +257,5 @@ button.popup-btn{
 }
 
 input{
-  margin: 1vh
+  margin: 1%
 }
