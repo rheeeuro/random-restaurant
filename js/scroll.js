@@ -4,4 +4,15 @@ disableScroll = () => {
     document.querySelector('body').addEventListener('mousewheel', this.removeEvent, { passive: false });
 };
 
+enableScroll = () => {
+    document.querySelector('body').removeEventListener('touchmove', this.removeEvent);
+    document.querySelector('body').removeEventListener('onclick', this.removeEvent);
+    document.querySelector('body').removeEventListener('mousewheel', this.removeEvent);
+}
+
+removeEvent = e => {
+    e.preventDefault();
+    e.stopPropagation();
+}
+
 disableScroll();
