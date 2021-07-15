@@ -117,6 +117,72 @@ function createItem(item){
 function randomRestaurant(){
     console.log(restaurants);
     // 랜덤 이벤트
+    const randomIndex = Math.floor(Math.random() * restaurants.length);
+    console.log(randomIndex)
+    const randomElement = restaurants[randomIndex];
+
+
+
+    rendomRouletteUi(randomIndex);
+    randomResultUi(randomElement.place_name);
+}
+
+function rendomRouletteUi(randomIndex){
+    if (document.getElementById('roulette')){
+        document.getElementById('roulette').remove();
+    }
+    var div = document.createElement("div");
+    div.id = 'roulette';
+
+    var ul = document.createElement("ul");
+    for(let i=randomIndex ; i<restaurants.length; i++){
+        var li = document.createElement("li");
+        var p = document.createElement("p");
+        p.innerText = restaurants[i].place_name;
+        li.appendChild(p);
+        ul.appendChild(li);
+    }
+    for(let i=0 ; i<randomIndex; i++){
+        var li = document.createElement("li");
+        var p = document.createElement("p");
+        p.innerText = restaurants[i].place_name;
+        li.appendChild(p);
+        ul.appendChild(li);
+    }
+    div.appendChild(ul);
+    document.getElementById('mapContainer').appendChild(div);
+    ul.animate([
+        // keyframes
+        { transform: `translateY(-${(restaurants.length-1)*100}px)` },
+        { transform: `translateY(-${(restaurants.length-1)*81}px)` },
+        { transform: `translateY(-${(restaurants.length-1)*64}px)` },
+        { transform: `translateY(-${(restaurants.length-1)*49}px)` },
+        { transform: `translateY(-${(restaurants.length-1)*36}px)` },
+        { transform: `translateY(-${(restaurants.length-1)*25}px)` },
+        { transform: `translateY(-${(restaurants.length-1)*16}px)` },
+        { transform: `translateY(-${(restaurants.length-1)*9}px)` },
+        { transform: `translateY(-${(restaurants.length-1)*4}px)` },
+        { transform: `translateY(-${(restaurants.length-1)*1}px)` },
+        { transform: `translateY(-${(restaurants.length-1)*0}px)` },
+      ], {
+        // timing options
+        duration: 2000,
+        });
+    document.getElementById('mapContainer').addEventListener('click', ()=>{
+        document.getElementById('roulette').style.display = 'none';
+    })
+}
+
+function randomResultUi(name){
+    if (document.getElementById('random-result')){
+        document.getElementById('random-result').remove();
+    }
+    var div = document.createElement("div");
+    var p = document.createElement("p");
+    p.innerText = '선정된 음식점: ' + name;
+    div.id = 'random-result'
+    div.appendChild(p);
+    document.getElementById('mapContainer').appendChild(div);
 }
 
 
@@ -175,5 +241,3 @@ function init(){
 if (mapUiBackBtn){
     init();
 }
-
-
