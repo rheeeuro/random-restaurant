@@ -51,14 +51,6 @@ function success(position){
 
     initKakaoMap();
     searchRestaurant();
-
-    // 이동할 위도 경도 위치를 생성합니다 
-    
-    // 지도 중심을 부드럽게 이동시킵니다
-    // 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다
-    // map.panTo(moveLatLon);
-    
-    // let menu = []
 }
 
 function fail(){
@@ -124,11 +116,11 @@ function createItem(item){
 
 function randomRestaurant(){
     console.log(restaurants);
+    // 랜덤 이벤트
 }
 
-// 지도에 마커를 표시하는 함수입니다
+
 function displayMarker(place) {
-    // 마커를 생성하고 지도에 표시합니다
     var point = new kakao.maps.LatLng(place.y, place.x) 
     var marker = new kakao.maps.Marker({
         map: map,
