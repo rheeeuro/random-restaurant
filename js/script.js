@@ -73,6 +73,14 @@ function searchRestaurant(){
             ps.categorySearch('FD6', placesSearchCB, {x: userCoords.longitude, y: userCoords.latitude, radius: range, page: i, size: 15}); 
         }
     } else {
+
+        var div = document.createElement("div");
+        var p = document.createElement("p");
+        p.innerText = keyword;
+        div.classList.add("keyword-title");
+        div.appendChild(p);
+        document.getElementById('mapContainer').appendChild(div);
+
         for(let i=1 ; i<=3 ; i++){
             ps.keywordSearch(keyword + '맛집', placesSearchCB, {page: i, size: 15});
         }
