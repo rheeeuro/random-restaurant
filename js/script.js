@@ -190,10 +190,14 @@ function rendomRouletteUi(randomIndex){
         { transform: `translateY(-${(restaurants.length-1)*9}px)` },
         { transform: `translateY(-${(restaurants.length-1)*4}px)` },
         { transform: `translateY(-${(restaurants.length-1)*1}px)` },
-        { transform: `translateY(-${(restaurants.length-1)*0}px)` },
+        { transform: `translateY(${(restaurants.length-1)*0.5}px)` },
+        { transform: `translateY(-${(restaurants.length-1)*0.25}px)` },
+        { transform: `translateY(${(restaurants.length-1)*0.125}px)` },
+        { transform: `translateY(-${(restaurants.length-1)*0.0625}px)` },
+        { transform: `translateY(${(restaurants.length-1)*0}px)` },
       ], {
         // timing options
-        duration: 2000,
+        duration: 1800,
         });
     document.getElementById('mapContainer').addEventListener('click', ()=>{
         document.getElementById('roulette').style.display = 'none';
