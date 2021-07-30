@@ -13,7 +13,7 @@ var userLocation, userMarker, bounds;
 var restaurants, restaurantMarkers;
 
 
-
+// 키워드, 범위 parameter 추출
 function getParameterByName(name, url = window.location.href) {
     name = name.replace(/[\[\]]/g, '\\$&');
     var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
@@ -23,6 +23,7 @@ function getParameterByName(name, url = window.location.href) {
     return decodeURIComponent(results[2].replace(/\+/g, ' '));
 }
 
+// 카카오 맵 생성
 function initKakaoMap(){
     infowindow = new kakao.maps.InfoWindow({zIndex:1});
 
@@ -38,8 +39,7 @@ function initKakaoMap(){
     yellowImg = new kakao.maps.MarkerImage(
         '../img/yellow.png',
         new kakao.maps.Size(40, 60), new kakao.maps.Point(20, 60));
-
-        
+   
     map = new kakao.maps.Map(mapContainer, mapOption); 
     ps = new kakao.maps.services.Places(map); 
     userMarker = new kakao.maps.Marker({
@@ -49,6 +49,7 @@ function initKakaoMap(){
     userMarker.setMap(map);
 }
 
+// 사용자 위도, 경도 가져오기
 function initGeolocation(){
     if(navigator.geolocation) {
         navigator.geolocation.getCurrentPosition( success, fail );
@@ -58,6 +59,7 @@ function initGeolocation(){
     }
 }
 
+// 사용자 좌표 획득 시
 function success(position){
     userCoords.latitude = position.coords.latitude;
     userCoords.longitude = position.coords.longitude;
@@ -68,10 +70,12 @@ function success(position){
     searchRestaurant();
 }
 
+// 사용자 좌표 미획득시 
 function fail(){
     // Could not obtain location
 }
 
+// 음식점 겅색
 function searchRestaurant(){
     bounds = new kakao.maps.LatLngBounds();
     document.getElementById('popup').innerHTML = '';
@@ -80,21 +84,19 @@ function searchRestaurant(){
             ps.categorySearch('FD6', placesSearchCB, {x: userCoords.longitude, y: userCoords.latitude, radius: range, page: i, size: 15}); 
         }
     } else {
-
         var div = document.createElement("div");
         var p = document.createElement("p");
         p.innerText = keyword;
         div.classList.add("keyword-title");
         div.appendChild(p);
         document.getElementById('mapContainer').appendChild(div);
-
         for(let i=1 ; i<=3 ; i++){
             ps.keywordSearch(keyword + '맛집', placesSearchCB, {page: i, size: 15});
         }
     }
 }
 
-// 키워드 검색 완료 시 호출되는 콜백함수 입니다
+// 키워드 검색 완료 시
 function placesSearchCB (data, status, pagination) {
     if (status === kakao.maps.services.Status.OK) {
         const filtered = data.filter(d => d.category_group_name === "음식점");
@@ -107,6 +109,7 @@ function placesSearchCB (data, status, pagination) {
     }
 }
 
+// 음식점 목록 생성
 function createItem(item){
     var a = document.createElement("a");
     a.href = item.place_url;
@@ -130,6 +133,7 @@ function createItem(item){
     document.getElementById('popup').appendChild(a);
 }
 
+// 랜덤 선택 함수
 function randomRestaurant(){
     console.log(restaurants);
     // 랜덤 이벤트
@@ -142,13 +146,11 @@ function randomRestaurant(){
     restaurantMarkers[randomIndex].setZIndex(3);
     restaurantMarkers[randomIndex].setImage(yellowImg);
     const randomElement = restaurants[randomIndex];
-
-
-
     rendomRouletteUi(randomIndex);
     randomResultUi(randomElement);
 }
 
+// 랜덤 선택 결과 출력
 function rendomRouletteUi(randomIndex){
     if (document.getElementById('roulette')){
         document.getElementById('roulette').remove();
@@ -198,6 +200,7 @@ function rendomRouletteUi(randomIndex){
     })
 }
 
+// 선정된 음식점 우상단에 표시
 function randomResultUi(element){
     if (document.getElementById('random-result')){
         document.getElementById('random-result').remove();
@@ -213,7 +216,7 @@ function randomResultUi(element){
     document.getElementById('mapContainer').appendChild(div);
 }
 
-
+// 지도 상에 마커 표시
 function displayMarker(place) {
     var point = new kakao.maps.LatLng(place.y, place.x) 
     var marker = new kakao.maps.Marker({
@@ -227,11 +230,11 @@ function displayMarker(place) {
         infowindow.setContent('<a href="' + place.place_url + '"><div style="padding:5px;font-size:12px;color:black;">' + place.place_name + '</div></a>');
         infowindow.open(map, marker);
     });
-
     bounds.extend(point);
     map.setBounds(bounds);
 }
 
+// 목록 보기 버튼 클릭 시
 function onListBtn(){
     document.getElementById('map-block').style.display = 'block';
     document.getElementById('popup-container').style.display = 'block';
@@ -239,19 +242,23 @@ function onListBtn(){
     document.getElementById('map-block').addEventListener('click', onCloseBtn);
 }
 
+// 현위치 버튼 클릭 시
 function onLocationBtn(){
     map.panTo(userLocation);
     console.log(restaurants);
 }
 
+// 닫기 버튼 클릭 시
 function onCloseBtn(){
     document.getElementById('map-block').style.display = 'none';
     document.getElementById('popup-container').style.display = 'none';
 }
 
+// 위치 초기화 버튼 클릭 시
 function onResetBtn(){
     map.setBounds(bounds);
 }
+
 
 function init(){
     restaurants = [];
