@@ -40,13 +40,13 @@ function initKakaoMap(){
         new kakao.maps.Size(40, 60), new kakao.maps.Point(20, 60));
 
         
-        map = new kakao.maps.Map(mapContainer, mapOption); 
-        ps = new kakao.maps.services.Places(map); 
-        userMarker = new kakao.maps.Marker({
-            position: userLocation,
-            image: hereImg
-        });
-        userMarker.setMap(map);
+    map = new kakao.maps.Map(mapContainer, mapOption); 
+    ps = new kakao.maps.services.Places(map); 
+    userMarker = new kakao.maps.Marker({
+        position: userLocation,
+        image: hereImg
+    });
+    userMarker.setMap(map);
 }
 
 function initGeolocation(){
@@ -97,10 +97,11 @@ function searchRestaurant(){
 // 키워드 검색 완료 시 호출되는 콜백함수 입니다
 function placesSearchCB (data, status, pagination) {
     if (status === kakao.maps.services.Status.OK) {
-        restaurants = restaurants.concat(data);
-        for (var i=0; i<data.length; i++) {
-            displayMarker(data[i]);
-            createItem(data[i]);
+        const filtered = data.filter(d => d.category_group_name === "음식점");
+        restaurants = restaurants.concat(filtered);
+        for (var i=0; i<filtered.length; i++) {
+            displayMarker(filtered[i]);
+            createItem(filtered[i]);
         }   
         randomRestaurant();    
     }
