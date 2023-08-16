@@ -91,7 +91,7 @@ function searchRestaurant(){
         div.appendChild(p);
         document.getElementById('mapContainer').appendChild(div);
         for(let i=1 ; i<=3 ; i++){
-            ps.keywordSearch(keyword + '맛집', placesSearchCB, {page: i, size: 15});
+            ps.keywordSearch(keyword + '맛집', placesSearchCB, {x: userCoords.longitude, y: userCoords.latitude, radius: range, page: i, size: 15});
         }
     }
 }
